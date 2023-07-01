@@ -8,7 +8,6 @@ import org.junit.After;
 import org.junit.Test;
 import pojo.CreateOrderRequest;
 import pojo.CreateUserRequest;
-import pojo.LoginUserRequest;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +30,6 @@ public class GetUserOrderTest {
         CreateUserRequest createUserRequest = UserProvider.getRandomCreateUserRequest();
         ValidatableResponse response = userClient.createUser(createUserRequest);
         accessToken = response.extract().path("accessToken");
-        LoginUserRequest loginUserRequest = LoginUserRequest.from(createUserRequest);
         CreateOrderRequest createOrderRequest = new CreateOrderRequest(ingredients);
         userClient.CreateOrder(accessToken, createOrderRequest);
         userClient.getListAllOrdersUser(accessToken)
@@ -50,7 +48,6 @@ public class GetUserOrderTest {
         CreateUserRequest createUserRequest = UserProvider.getRandomCreateUserRequest();
         ValidatableResponse response = userClient.createUser(createUserRequest);
         accessToken = response.extract().path("accessToken");
-        LoginUserRequest loginUserRequest = LoginUserRequest.from(createUserRequest);
         CreateOrderRequest createOrderRequest = new CreateOrderRequest(ingredients);
         userClient.CreateOrder("", createOrderRequest);
         userClient.getListAllOrdersUser("")

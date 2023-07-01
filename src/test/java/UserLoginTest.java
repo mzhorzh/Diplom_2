@@ -38,7 +38,6 @@ public class UserLoginTest {
     @Description("Должен вернуться код ошибки 401 и в теле сообщение \"email or password are incorrect\"")
     public void userWithWrongEmailShouldNotBeLogin() {
         CreateUserRequest createUserRequest = new UserProvider().getRandomCreateUserRequest();
-        LoginUserRequest loginUserRequest = LoginUserRequest.from(createUserRequest);
         userClient.createUser(createUserRequest);
         createUserRequest.setEmail("wrong_email@email.com");
         userClient.loginUser(LoginUserRequest.from(createUserRequest))
@@ -51,7 +50,6 @@ public class UserLoginTest {
     @Description("Должен вернуться код ошибки 401 и в теле сообщение \"email or password are incorrect\"")
     public void userWithWrongPasswordShouldNotBeLogin() {
         CreateUserRequest createUserRequest = new UserProvider().getRandomCreateUserRequest();
-        LoginUserRequest loginUserRequest = LoginUserRequest.from(createUserRequest);
         userClient.createUser(createUserRequest);
         createUserRequest.setPassword("wrong_password");
         userClient.loginUser(LoginUserRequest.from(createUserRequest))
@@ -64,7 +62,6 @@ public class UserLoginTest {
     @Description("Должен вернуться код ошибки 401 и в теле сообщение \"email or password are incorrect\"")
     public void userWithWrongEmailAndPasswordShouldNotBeLogin() {
         CreateUserRequest createUserRequest = new UserProvider().getRandomCreateUserRequest();
-        LoginUserRequest loginUserRequest = LoginUserRequest.from(createUserRequest);
         userClient.createUser(createUserRequest);
         createUserRequest.setEmail("wrong_email@email.com");
         createUserRequest.setPassword("wrong_password");

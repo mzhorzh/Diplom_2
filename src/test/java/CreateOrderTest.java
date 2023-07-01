@@ -8,7 +8,6 @@ import org.junit.After;
 import org.junit.Test;
 import pojo.CreateOrderRequest;
 import pojo.CreateUserRequest;
-import pojo.LoginUserRequest;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +30,6 @@ public class CreateOrderTest {
         CreateUserRequest createUserRequest = UserProvider.getRandomCreateUserRequest();
         ValidatableResponse response = userClient.createUser(createUserRequest);
         accessToken = response.extract().path("accessToken");
-        LoginUserRequest loginUserRequest = LoginUserRequest.from(createUserRequest);
         CreateOrderRequest createOrderRequest = new CreateOrderRequest(ingredients);
         userClient.CreateOrder(accessToken, createOrderRequest)
                 .statusCode(SC_OK)
@@ -48,7 +46,6 @@ public class CreateOrderTest {
         CreateUserRequest createUserRequest = UserProvider.getRandomCreateUserRequest();
         ValidatableResponse response = userClient.createUser(createUserRequest);
         accessToken = response.extract().path("accessToken");
-        LoginUserRequest loginUserRequest = LoginUserRequest.from(createUserRequest);
         CreateOrderRequest createOrderRequest = new CreateOrderRequest(ingredients);
         userClient.CreateOrder("", createOrderRequest)
                 .statusCode(SC_UNAUTHORIZED);
@@ -61,7 +58,6 @@ public class CreateOrderTest {
         CreateUserRequest createUserRequest = UserProvider.getRandomCreateUserRequest();
         ValidatableResponse response = userClient.createUser(createUserRequest);
         accessToken = response.extract().path("accessToken");
-        LoginUserRequest loginUserRequest = LoginUserRequest.from(createUserRequest);
         CreateOrderRequest createOrderRequest = new CreateOrderRequest(null);
         userClient.CreateOrder(accessToken, createOrderRequest)
                 .statusCode(SC_BAD_REQUEST)
@@ -77,7 +73,6 @@ public class CreateOrderTest {
         CreateUserRequest createUserRequest = UserProvider.getRandomCreateUserRequest();
         ValidatableResponse response = userClient.createUser(createUserRequest);
         accessToken = response.extract().path("accessToken");
-        LoginUserRequest loginUserRequest = LoginUserRequest.from(createUserRequest);
         ingredients.set(0, "12345678");
         CreateOrderRequest createOrderRequest = new CreateOrderRequest(ingredients);
         userClient.CreateOrder(accessToken, createOrderRequest)

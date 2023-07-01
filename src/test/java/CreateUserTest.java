@@ -2,6 +2,7 @@ import clients.UserClient;
 import dataprovider.UserProvider;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
+import io.restassured.response.ValidatableResponse;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.After;
@@ -19,9 +20,10 @@ public class CreateUserTest {
     public void userShouldBeCreated() {
         CreateUserRequest createUserRequest = UserProvider.getRandomCreateUserRequest();
 
-        userClient.createUser(createUserRequest)
+        ValidatableResponse response = userClient.createUser(createUserRequest)
                 .statusCode(SC_OK)
-                .body("success", Matchers.equalTo(true));;
+                .body("success", Matchers.equalTo(true));
+        accessToken = response.extract().path("accessToken");
     }
 
     @Test
